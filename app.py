@@ -478,12 +478,3 @@ if __name__ == '__main__':
     else:
         print(f"Running in DEVELOPMENT mode at http://127.0.0.1:{port}/")
         app.run(debug=True, port=port)
-```
-
----
-
-### **1.2 Create Procfile**
-
-Create a new file called `Procfile` (no extension!) in your project root:
-```
-web: gunicorn app:server
