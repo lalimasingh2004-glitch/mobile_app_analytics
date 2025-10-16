@@ -464,4 +464,25 @@ def refresh_data(n_clicks):
 # ========== RUN APP ==========
 if __name__ == '__main__':
     print("Starting dashboard server...")
-    app.run(debug=True)
+    # Getting port from environment variable (for deployment) or use 8050
+    import os
+    port = int(os.environ.get('PORT', 8050))
+    
+    # Checking if running in production
+    is_production = os.environ.get('RENDER', False)
+    
+    if is_production:
+        print(f"Running in PRODUCTION mode on port {port}")
+        app.run(host='0.0.0.0', port=port, debug=False)
+    else:
+        print(f"Running in DEVELOPMENT mode at http://127.0.0.1:{port}/")
+        app.run(debug=True, port=port)
+```
+
+---
+
+### **1.2 Create Procfile**
+
+Create a new file called `Procfile` (no extension!) in your project root:
+```
+web: gunicorn app:server
