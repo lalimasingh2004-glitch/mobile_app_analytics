@@ -65,7 +65,8 @@ kpi_cards = [
 # ========== INITIALIZE APP ==========
 app = Dash(__name__)
 app.config.suppress_callback_exceptions = True
-
+# Exposing the underlying Flask server (needed for deployment)
+server = app.server
 # ========== APP LAYOUT ==========
 app.layout = html.Div([
     html.H1(" Mobile App Analytics Dashboard", style={'textAlign': 'center', 'marginBottom': '20px', 'color': '#2c3e50'}),
