@@ -68,7 +68,7 @@ app.config.suppress_callback_exceptions = True
 
 # ========== APP LAYOUT ==========
 app.layout = html.Div([
-    html.H1("📈 Mobile App Analytics Dashboard", style={'textAlign': 'center', 'marginBottom': '20px', 'color': '#2c3e50'}),
+    html.H1(" Mobile App Analytics Dashboard", style={'textAlign': 'center', 'marginBottom': '20px', 'color': '#2c3e50'}),
     
     # KPI Cards
     html.Div(kpi_cards, style={'display': 'flex', 'justifyContent': 'space-between', 'margin': '30px 0', 'flexWrap': 'wrap', 'gap': '10px'}),
@@ -126,7 +126,7 @@ app.layout = html.Div([
     
     # ========== REFRESH BUTTON ==========
     html.Div([
-        html.Button("🔁 Refresh Data", id='refresh-btn',
+        html.Button(" Refresh Data", id='refresh-btn',
                     style={
                         'margin': '10px auto',
                         'display': 'block',
@@ -140,7 +140,7 @@ app.layout = html.Div([
                         'boxShadow': '0 2px 5px rgba(0,0,0,0.2)',
                         'transition': 'background-color 0.3s'
                     }),
-        dcc.ConfirmDialog(id='refresh-dialog', message='✅ Data refreshed successfully!')
+        dcc.ConfirmDialog(id='refresh-dialog', message=' Data refreshed successfully!')
     ], style={'textAlign': 'center', 'marginBottom': '30px'}),    
     # Store to track what's been loaded
     dcc.Store(id='growth-loaded', data=False),
@@ -153,7 +153,7 @@ app.layout = html.Div([
             id="loading-growth",
             type="circle",
             children=[
-                html.Button("📈 Toggle Growth & Engagement Charts", id='btn-growth', n_clicks=0, 
+                html.Button(" Toggle Growth & Engagement Charts", id='btn-growth', n_clicks=0, 
                            style={'margin': '10px', 'padding': '12px 24px', 'fontSize': '16px', 'cursor': 'pointer', 
                                   'backgroundColor': '#3498db', 'color': 'white', 'border': 'none', 'borderRadius': '5px'}),
                 html.Div(id='growth-section', style={'display': 'none'})
@@ -164,7 +164,7 @@ app.layout = html.Div([
             id="loading-retention",
             type="circle",
              children=[
-                html.Button("🔄 Toggle Retention Analytics", id='btn-retention', n_clicks=0,
+                html.Button(" Toggle Retention Analytics", id='btn-retention', n_clicks=0,
                            style={
                                'margin': '10px', 
                                'padding': '12px 24px', 
@@ -185,7 +185,7 @@ app.layout = html.Div([
             id="loading-user",
             type="circle",
             children=[
-                html.Button("👤 Toggle User Behavior & Funnel", id='btn-user', n_clicks=0,
+                html.Button(" Toggle User Behavior & Funnel", id='btn-user', n_clicks=0,
                            style={
                                'margin': '10px', 
                                'padding': '12px 24px', 
@@ -206,7 +206,7 @@ app.layout = html.Div([
             id="loading-churn",
             type="circle",
             children=[
-                html.Button("📉 Toggle Churn Prediction Results", id='btn-churn', n_clicks=0,
+                html.Button(" Toggle Churn Prediction Results", id='btn-churn', n_clicks=0,
                            style={'margin': '10px', 'padding': '12px 24px', 'fontSize': '16px', 'cursor': 'pointer',
                                   'backgroundColor': '#16a085', 'color': 'white', 'border': 'none', 'borderRadius': '5px', 'boxShadow': '0 2px 5px rgba(0,0,0,0.15)'}),
                 html.Div(id='churn-section', style={'display': 'none'})
@@ -337,14 +337,14 @@ def toggle_churn(n_clicks):
             
             # Create visualizations
             fig1 = px.histogram(predictions, x='churn_probability', nbins=30, 
-                               title='📊 Predicted Churn Probability Distribution',
+                               title=' Predicted Churn Probability Distribution',
                                labels={'churn_probability': 'Churn Probability'})
             fig1.update_layout(height=400, template='plotly_white', 
                               margin=dict(l=40, r=40, t=60, b=40))
 
             fig2 = px.bar(predictions.groupby('user_segment')['churn_prediction'].mean().reset_index(),
                           x='user_segment', y='churn_prediction',
-                          title='🎯 Average Churn Rate by User Segment',
+                          title=' Average Churn Rate by User Segment',
                           labels={'churn_prediction': 'Avg Churn Rate', 'user_segment': 'User Segment'})
             fig2.update_layout(height=400, template='plotly_white',
                               margin=dict(l=40, r=40, t=60, b=40))
@@ -414,7 +414,7 @@ def toggle_churn(n_clicks):
         
         except Exception as e:
             error_msg = html.Div([
-                html.H3("⚠️ Error in Churn Prediction", style={'color': '#e74c3c'}),
+                html.H3(" Error in Churn Prediction", style={'color': '#e74c3c'}),
                 html.P(f"Error: {str(e)}", style={'color': '#555', 'fontSize': '14px'}),
                 html.P("Please ensure your data has the required columns for churn prediction.", 
                       style={'color': '#777', 'fontSize': '13px', 'marginTop': '10px'})
@@ -437,7 +437,7 @@ def toggle_churn(n_clicks):
 def refresh_data(n_clicks):
     global dua_df, ret_df, mobile_df, total_dau, avg_session, avg_retention, total_opens, avg_screens
     
-    print("🔄 Refreshing data...")
+    print(" Refreshing data...")
     # Reload data
     dua_df = pd.read_csv("data/advanced_dua.csv")
     ret_df = pd.read_csv("data/advanced_retention.csv")
@@ -458,7 +458,7 @@ def refresh_data(n_clicks):
     dua_df['sessions_per_user'] = dua_df['total_sessions'] / dua_df['dau']
     dua_df['dau_growth'] = dua_df['dau'].pct_change() * 100
     
-    print("✅ Data refresh complete!")
+    print(" Data refresh complete!")
     return True
 
 # ========== RUN APP ==========
