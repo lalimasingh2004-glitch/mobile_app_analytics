@@ -309,10 +309,10 @@ MODEL_PATH = "data/Deliverable/churn_prediction_model.pkl"
 
 | Operation                   | Time |
 | --------------------------- | ---- |
-| Dashboard Load              | < 2s |
-| Section Expand              | < 1s |
-| Data Refresh                | < 3s |
-| Churn Prediction (9K users) | < 5s |
+| Dashboard Load              | few mins |
+| Section Expand              | < 15s |
+| Data Refresh                | < 5s |
+| Churn Prediction (9K users) | < 10s |
 
 ---
 
