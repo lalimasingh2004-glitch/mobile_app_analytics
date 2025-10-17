@@ -4,11 +4,12 @@
 import pandas as pd
 import numpy as np
 import joblib
+import os
 
 # ====================================================
 # 1️⃣  Loading trained churn model
 # ====================================================
-MODEL_PATH = r'C:\Users\sjn17\Downloads\mobile_app_analytics\data\Deliverable\churn_prediction_model.pkl'
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "data", "Deliverable", "churn_prediction_model.pkl")
 model = joblib.load(MODEL_PATH)
 
 # ====================================================

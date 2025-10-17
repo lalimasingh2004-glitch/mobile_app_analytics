@@ -130,17 +130,6 @@ Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Large files 
-*.pkl
-*.joblib
-*.h5
-*.hdf5
-
-# Data files 
-# data/*.csv
-# data/**/*.csv
-# data/Deliverable/*.pkl
-
 # Logs
 *.log
 logs/
