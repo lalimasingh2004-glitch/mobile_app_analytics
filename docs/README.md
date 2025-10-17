@@ -43,7 +43,14 @@ This project delivers a complete *data-to-decision pipeline* for mobile app anal
 - *Growth & Engagement Analytics* – daily active users, session patterns, and screen interactions  
 - *Retention Analysis* – cohort-based visualization  
 - *User Behavior Analysis* – funnel and segmentation charts  
-- *ML-powered Churn Prediction* – churn probabilities & classifications  
+- *ML-powered Churn Prediction* – churn probabilities & classifications
+
+### Note on Load Time
+- **First Load May Take Few Minutes**  
+- This dashboard is hosted on [Render](https://render.com) using a free tier.  
+- Free-tier apps spin down when inactive, so the **first request after some time** may take up to a minute to load.  
+- Subsequent visits will load instantly.
+
 
 ###  Technical Highlights
 -  Lazy Loading for faster performance  
@@ -149,6 +156,9 @@ mobile_app_analytics/
 ├── churn_model.py # ML churn prediction script
 ├── metrics_extractor.py # KPI & metric extraction module
 ├── requirements.txt
+├── Procfile
+├── render.yaml
+├── runtime.txt
 │
 ├── data/
 │ ├── AI/ # AI-related experimental dashboard
