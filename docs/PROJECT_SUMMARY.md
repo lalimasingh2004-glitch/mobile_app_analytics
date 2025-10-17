@@ -243,6 +243,7 @@ models = {
 * `README.md` - Complete project guide
 * `METHODOLOGY.md` - Detailed analysis approach
 * `PROJECT_SUMMARY.md` - Executive overview
+* `DEPLOYMENT.md` - Deployment documentation
 * Executive presentation (slides in `docs/`)
 * Business impact analysis (`business_impact.py`)
 * Metrics extraction utility (`metrics_extractor.py`)
