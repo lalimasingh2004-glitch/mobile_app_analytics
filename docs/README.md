@@ -1,6 +1,6 @@
 #  Mobile App Analytics Dashboard
 
->  **[View Live Dashboard](https://mobile-app-analytics.onrender.com)** | [Documentation](docs/) | [GitHub](https://github.com/lalimasingh2004-glitch/mobile_app_analytics)
+>  **[View Live Dashboard](https://mobile-app-analytics.onrender.com)** | [GitHub](https://github.com/lalimasingh2004-glitch/mobile_app_analytics)
 
 
 
