@@ -1,3 +1,9 @@
+#  Mobile App Analytics Dashboard
+
+>  **[View Live Dashboard](https://mobile-app-analytics.onrender.com)** | [Documentation](docs/) | [GitHub](https://github.com/lalimasingh2004-glitch/mobile_app_analytics)
+
+
+
 <img width="1841" height="767" alt="dash1" src="https://github.com/user-attachments/assets/1d315bc7-9340-41a9-97bc-fbf330ae7e75" /> 
  
  <img width="1877" height="800" alt="dash2" src="https://github.com/user-attachments/assets/c4034d07-df37-49a5-bbdc-1086b67becfe" />
