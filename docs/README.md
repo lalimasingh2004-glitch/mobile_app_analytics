@@ -174,6 +174,7 @@ mobile_app_analytics/
 ├── docs/
 │ ├── METHODOLOGY.md
 │ ├── README.md
+│ ├──DEPLOYMENT.md 
 │ └── PROJECT_SUMMARY.md
 │
 ├── notebooks/
