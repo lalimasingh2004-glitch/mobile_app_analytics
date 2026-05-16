@@ -144,7 +144,7 @@ refresh_data()
 ---
 
 ## Project Structure
-
+```
 mobile_app_analytics/
 │
 ├── app.py                        # Main dashboard
