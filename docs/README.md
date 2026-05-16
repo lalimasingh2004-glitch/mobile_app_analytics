@@ -190,7 +190,7 @@ mobile_app_analytics/
 └── dataset.py                # Data generation script
 
 ---
-
+```
 ## Data Pipeline
 
 Raw Data → Cleaning (SQL) → Sub Data → Analysis (Pandas) → Aggregation → Final Dataset → ML & Dashboard
