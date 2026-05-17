@@ -1,15 +1,12 @@
+# Mobile App Analytics Dashboard - Project Summary
 
-# Mobile App Analytics Dashboard
+## Executive Summary
 
-## Project Summary
-**Mobile App Analytics Dashboard - Complete Project Overview**
+A production-ready business intelligence dashboard with ML-powered churn prediction, analyzing 9,340 users and 146,194 sessions to identify $121,887 in revenue at risk — with a story-driven 5-act dashboard that translates raw data into actionable business decisions.
 
-**Executive Summary:**  
-A comprehensive 8-day analytics sprint delivering a production-ready dashboard with machine learning-powered churn prediction, analyzing 9,340 users and 146,194 sessions to identify $121,887 in annual revenue opportunities.  
-
-- **Project Status:** COMPLETE - Production Ready  
-- **Completion Date:** October 15, 2025  
-- **Total Duration:** 48 hours (12 days × 4 hours)
+- **Project Status:** COMPLETE - Production Ready
+- **Last Updated:** May 2026
+- **Live Dashboard:** https://mobile-app-analytics-3.onrender.com
 
 ---
 
@@ -17,408 +14,162 @@ A comprehensive 8-day analytics sprint delivering a production-ready dashboard w
 
 ### Quantitative Achievements
 
-| Metric                     | Achievement            |
-|----------------------------|------------------------|
-| Users Analyzed             | 9,340                  |
-| Sessions Tracked           | 146,194                |
-| ML Model Accuracy          | 85%+                   |
-| Dashboard Visualizations   | 20+ interactive charts |
-| Revenue Opportunity        | $121,887 annually      |
-| High-Risk Users Identified | 934 users              |
-| Dashboard Load Time        | <2 seconds             |
-| Documentation Pages        | 3 comprehensive guides |
+| Metric | Achievement |
+|--------|-------------|
+| Users Analyzed | 9,340 |
+| Sessions Tracked | 146,194 |
+| F1 Score | 0.851 |
+| AUC-ROC | 0.994 |
+| Precision | 92% |
+| Recall | 79% |
+| Class Imbalance Handling | class_weight='balanced' (5.4% churn rate) |
+| Engineered Features | 25 per user |
+| Revenue at Risk Identified | $121,887 |
+| High-Risk Users Identified | 504 churned users |
 
 ### Qualitative Achievements
 
-**Business Value**
-- Clear, data-driven insights for decision-making  
-- Actionable recommendations with quantified ROI  
-- Executive-ready presentation materials  
-- Strategic roadmap for user retention  
+**Business Value:**
+- Story-driven dashboard answering 5 core business questions
+- Plain-English insight boxes below every chart
+- Strategic recommendations with quantified revenue impact
+- Executive-ready presentation format
 
-**Technical Excellence**
-- Production-grade code (500+ lines)  
-- Optimized performance with lazy loading  
-- Comprehensive error handling  
-- Modular, maintainable architecture  
-
-**Knowledge Transfer**
-- Complete technical documentation  
-- Detailed methodology guide  
-- Code comments and explanations  
-- Usage examples and troubleshooting  
+**Technical Excellence:**
+- Proper churn definition (30-day inactivity rule)
+- Class imbalance handled correctly (not just accuracy)
+- Model evaluated on F1, AUC-ROC, Precision, Recall
+- Auto-deploys to Render on every GitHub push
 
 ---
 
-## Day-by-Day Sprint Breakdown
+## The 5-Act Dashboard Story
 
-### Day 1: Foundation & Data Setup
-**Objective:** Establish project infrastructure and understand data  
-**Deliverables:**
-- Environment setup (Python 3.8+, virtual environment)  
-- PostgreSQL database configuration with pgAdmin 4  
-- Raw data generation via `src/dataset.py`  
-- Initial data exploration in Jupyter notebooks  
-- Project structure established  
+**ACT 1 — What is the problem?**
+504 users churned at 5.4% — leaving $121,887 in revenue at risk.
 
-**Key Insights:**
-- Identified 9,340 unique users across 4 segments  
-- Discovered 146,194 total sessions  
-- Established data schema and relationships  
+**ACT 2 — Who is churning?**
+Breakdown by user segment, device type, and acquisition channel.
 
----
+**ACT 3 — Why are they churning?**
+Top 5 behavioural signals from Random Forest feature importance.
 
-### Day 2-3: Data Cleaning & SQL Processing
-**Objective:** Clean and structure data for analysis  
-**Deliverables:**
-- SQL queries for data extraction (in `/sql/` folder)  
-- Created 9 specialized sub-datasets in `data/sub_data/`  
-- Pandas-based cleaning pipeline  
-- Data quality validation checks  
-- `final_clean_dataset.csv` generated  
+**ACT 4 — How accurately can we predict churn?**
+F1=0.851, AUC-ROC=0.994, Precision=92%, Recall=79%.
 
-**Technical Approach:**
-```sql
--- Example SQL cleaning snippet
-DELETE FROM sessions
-WHERE ctid NOT IN (
-    SELECT MIN(ctid)
-    FROM sessions
-    GROUP BY user_id, date, session_id
-);
-
-UPDATE sessions
-SET session_duration = 0
-WHERE session_duration IS NULL;
-
-ALTER TABLE sessions
-ALTER COLUMN date TYPE DATE USING date::DATE;
-````
-
-* Handled missing values (median/mode imputation)
-* Removed duplicates and outliers (IQR method)
-* Standardized data types and formats
-* Created normalized database structure
-
-**Data Quality Metrics:**
-
-* 99.7% data completeness achieved
-* 0 duplicate records after cleaning
-* All date ranges validated (2020-2025)
+**ACT 5 — What should the business do?**
+3 strategic recommendations with revenue recovery scenarios.
 
 ---
 
-### Day 4 to 6: Pandas, Core Metrics & EDA
+## Machine Learning Model
 
-**Objective:** Calculate KPIs and explore patterns
-**Deliverables:**
+**Algorithm:** Random Forest Classifier
+**Framework:** Scikit-learn
+**Features:** 25 engineered features per user
 
-* Calculated 25+ business metrics
-* Created `advanced_dua.csv` (daily user activity)
-* Created `advanced_retention.csv` (cohort analysis)
-* Completed exploratory analysis in notebooks
-* Statistical significance testing
+### Performance Metrics
 
-**Key Findings:**
+| Metric | Value |
+|--------|-------|
+| Accuracy | 98.5% |
+| F1 Score | 0.851 |
+| AUC-ROC | 0.994 |
+| Precision | 0.92 |
+| Recall | 0.79 |
 
-* Average session duration: 72.5 minutes (exceptional)
-* Retention rate: 60% (moderate, improvable)
-* Churn rate: 40% (major opportunity)
-* Power users: 16.3% (high-value segment)
-* iOS users: 5.4% higher retention than Android
+### Key Design Decisions
 
-**Analysis Notebooks:**
+**Churn Definition:**
+Users last seen more than 30 days before the most recent date = churned. Industry standard used by Netflix, Spotify, and others.
 
-* `core_metrics1.ipynb` - Session analysis
-* `core_metrics2.ipynb` - User segmentation
-* `pandas_analysis.ipynb` - Statistical tests
+**Class Imbalance:**
+Only 5.4% of users churned. Used `class_weight='balanced'` to prevent the model from simply predicting "not churned" for everyone.
 
----
+**Evaluation Priority:**
+F1-score and AUC-ROC prioritized over raw accuracy — the only correct approach for imbalanced classification problems.
 
-### Day 7-8: Machine Learning Development
-
-**Objective:** Build predictive churn model
-**Deliverables:**
-
-* Feature engineering (20+ features)
-* Model training and validation
-* Hyperparameter tuning via grid search
-* `churn_prediction_model.pkl` saved
-* Generated `churn_predictions.csv`
-* Created `all_user_risk_scores.csv`
-* Identified `high_risk_users.csv` (934 users)
-* Documented `feature_importance.csv`
-
-**Feature Engineering:**
-
-```python
-# Aggregated session metrics
-session_features = mobile_df.groupby('user_id').agg({
-    'session_duration': ['mean', 'std', 'min', 'max', 'sum'],
-    'screens_viewed': ['mean', 'std', 'max', 'sum'],
-    'app_opens': ['mean', 'std', 'max', 'sum']
-})
-
-# Temporal features
-temporal_features = mobile_df.groupby('user_id').agg({'date': ['count', 'min', 'max']})
-```
-
-**Model Selection:**
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import GradientBoostingClassifier
-from xgboost import XGBClassifier
-
-models = {
-    'Logistic Regression': LogisticRegression(),
-    'Random Forest': RandomForestClassifier(),
-    'Gradient Boosting': GradientBoostingClassifier(),
-    'XGBoost': XGBClassifier()
-}
-# Random Forest selected based on 5-fold CV
-```
-
-**Performance:**
-
-```python
-# Test accuracy: 85%
-# Precision (churned): 68%
-# Recall (churned): 62%
-# ROC-AUC: 0.884
-```
-
-**Top Predictive Features:**
-
-* `session_duration_mean` (23.4%)
-* `retention_rate_mean` (18.7%)
-* `total_active_days` (15.2%)
-* `screens_viewed_sum` (12.1%)
-* `app_opens_mean` (10.3%)
-
-**Notebook:** `advanced_analytics.ipynb`
-
----
-
-### Day 9: Dashboard Foundation
-
-**Objective:** Build interactive visualization platform
-**Deliverables:**
-
-* Created `app.py` (main dashboard)
-* Implemented 5 KPI cards
-* Built 4 collapsible sections
-* Integrated Plotly visualizations
-* Added lazy loading for performance
-* Implemented data sampling (10K rows)
-
-**Dashboard Sections:**
-
-* Growth & Engagement - 7 charts
-* Retention Analytics - 3 charts
-* User Behavior - 6 charts
-* Churn Prediction - 3 components
-
----
-
-### Day 10-11: Dashboard Enhancement
-
-**Objective:** Add ML predictions and business intelligence
-**Deliverables:**
-
-* Integrated `churn_model.py` into dashboard
-* Created Executive Summary section
-* Implemented data refresh button
-* Added churn prediction visualizations
-* Optimized dashboard performance (<2s load)
-
----
-
-### Day 12: Documentation & Presentation
-
-**Objective:** Create comprehensive documentation and presentation materials
-**Deliverables:**
-
-* `README.md` - Complete project guide
-* `METHODOLOGY.md` - Detailed analysis approach
-* `PROJECT_SUMMARY.md` - Executive overview
-* `DEPLOYMENT.md` - Deployment documentation
-* Executive presentation (slides in `docs/`)
-* Business impact analysis (`business_impact.py`)
-* Metrics extraction utility (`metrics_extractor.py`)
-
----
-
-## Business Impact Analysis
-
-**Revenue Opportunities Identified:**
-
-**Scenario 1: 5% Retention Improvement**
-
-```text
-Additional Retained Users: 467
-Annual Revenue Impact: $56,040
-CAC Savings: $11,675
-Total Benefit: $67,715
-```
-
-**Scenario 2: High-Risk User Intervention**
-
-```text
-High-Risk Users: 934
-Revenue at Risk: $112,080
-Expected Save Rate: 50%
-Users Saved: 467
-Revenue Saved: $56,040
-Intervention Cost: $1,868
-Net Benefit: $54,172
-ROI: 28x
-```
-
-**Scenario 3: Casual User Upgrade**
-
-```text
-Casual Users: 3,540
-Target Conversion: 20% = 708 users
-Revenue per Upgrade: $120/year
-Estimated Impact: $85,000
-```
-
-**Total Annual Opportunity:** $206,887
-**Investment Required:** $107,000
-**ROI:** 93%
-**Payback Period:** 6.2 months
-
----
-
-## Key Insights & Findings
-
-**User Engagement Patterns**
-
-* 72.5-minute sessions indicate exceptional product-market fit
-* 36.9 screens per session shows deep exploration
-* 0.85% daily growth rate demonstrates healthy expansion
-
-**Retention Challenges**
-
-* Day 1-9 critical for early intervention
-* Retention drops from 96.1% → 75.3%
-* Churn rate: 40%
-
-**Channel Performance**
-
-* App Store users highest retention
-* Paid Social effective
-* Organic best volume-to-quality ratio
-
-**Device Analysis**
-
-* iOS users: 5.4% higher retention
-* p-value = 0.03 (statistically significant)
+### Top Churn Drivers
+1. `avg_retention_rate` — strongest predictor
+2. `active_days` — habit formation is critical
+3. `total_sessions` — low engagement = early churn signal
+4. `avg_session_duration` — short sessions = low value
+5. `total_app_opens` — early disengagement indicator
 
 ---
 
 ## Strategic Recommendations
 
-**Priority 1 (Next 30 Days):**
+**01 — Target High-Risk Users Immediately**
+Model flags users with >70% churn probability. Personalised re-engagement campaigns before they leave. A small retention offer is far cheaper than losing $241.84 per user.
 
-1. Launch High-Risk User Campaign
-2. Optimize Onboarding Flow
+**02 — Fix Early Engagement**
+Active days and session count are the #2 and #3 churn drivers. Users who don't form a habit in the first 7 days are most at risk. Improve onboarding with push notifications and daily streaks.
 
-**Priority 2 (Next 90 Days):**
-3. Casual User Upgrade Program
-4. Channel Optimization
+**03 — Reassess Acquisition Channels**
+The 'unknown' channel has a 50% churn rate — likely attracting low-intent users. Reallocate budget toward channels with better long-term retention.
 
-**Priority 3 (6-12 Months):**
-5. Advanced ML Capabilities
-6. Product Development
-7. Analytics Expansion
+### Revenue Recovery Scenarios
+
+| Scenario | Users Saved | Revenue Saved |
+|----------|-------------|---------------|
+| Retain 25% of churners | 126 users | $30,472 |
+| Retain 50% of churners | 252 users | $60,944 |
+| Retain 75% of churners | 378 users | $91,415 |
 
 ---
 
 ## Technical Architecture
 
 **Tech Stack:**
-
-* Python 3.8+, Pandas, NumPy, Joblib
-* Scikit-learn, Random Forest, Feature engineering
-* Plotly, Dash, Matplotlib, Seaborn, Responsive design
-* PostgreSQL, pgAdmin 4, SQL queries
+- Python 3.8+, Pandas, NumPy, Joblib
+- Scikit-learn (Random Forest, class_weight='balanced')
+- Plotly Dash (dark professional theme)
+- PostgreSQL + pgAdmin 4
+- Git + GitHub + Render (auto-deploy)
 
 **Data Pipeline:**
-
-```
 Raw Data Generation (dataset.py)
-         ↓
+↓
 PostgreSQL Database
-         ↓
+↓
 SQL-based Extraction & Cleaning
-         ↓
+↓
 9 Specialized Sub-datasets
-         ↓
-Pandas Aggregation
-         ↓
-Final Analytical Datasets
-         ↓
-Dashboard / ML Model / Business Reports
-```
+↓
+Pandas Aggregation & Feature Engineering
+↓
+Random Forest Model (evaluate_churn.py)
+↓
+5-Act BI Dashboard (app.py)
 
-**Dashboard Architecture:**
-
-* `app.py` with KPI cards, collapsible sections, executive summary, refresh button
-* Visualizations: Growth (7), Retention (3), User Behavior (6), Churn Predictions (3)
-* Lazy loading, precomputed metrics, efficient callbacks
-
----
-
-## Deliverables Inventory
-
-**Code Files:**
-
-```
-app.py
-churn_model.py
-metrics_extractor.py
-business_impact.py
-src/dataset.py
-```
-
-**Data Assets:** `data/` folder with cleaned datasets, outputs, sub-data
-
-**Analysis Notebooks:** `notebooks/` folder
-
-**Documentation:** `docs/` folder
-
-**Supporting Files:** `requirements.txt`, `.gitignore`, `sql/`
+**Key Files:**
+app.py                  ← 5-Act story dashboard
+evaluate_churn.py       ← Model evaluation script
+churn_model.py          ← Prediction script
+metrics_extractor.py    ← KPI extraction
+business_impact.py      ← Revenue impact analysis
 
 ---
 
-## Success Metrics & KPIs
+## Deliverables
 
-| Criterion      | Target   | Achieved | Status |
-| -------------- | -------- | -------- | ------ |
-| User Coverage  | 9,000+   | 9,340    | done   |
-| Model Accuracy | >80%     | 85%+     | done   |
-| Dashboard Load | <3s      | <2s      | done   |
-| Visualizations | 15+      | 20+      | done   |
-| Business Value | $121K+   | $121K+   | done   |
-| Documentation  | Complete | 4 docs   | done   |
+**Code:** `app.py`, `evaluate_churn.py`, `churn_model.py`, `metrics_extractor.py`, `business_impact.py`
+
+**Data:** `data/` folder with cleaned datasets and model artifacts
+
+**Model:** `churn_prediction_model_v2.pkl` (trained with class_weight='balanced')
+
+**Charts:** `churn_evaluation_charts.png` (confusion matrix, ROC curve, feature importance)
+
+**Documentation:** `README.md`, `METHODOLOGY.md`, `PROJECT_SUMMARY.md`, `DEPLOYMENT.md`
 
 ---
 
-## Lessons Learned
+## Author
 
-**Technical Learnings**
-
-* Performance optimization is critical
-* Data quality is foundation
-* Random Forest better than XGBoost for interpretability
-* Dashboard design: progressive disclosure, visual hierarchy
-
-**Business Learnings**
-
-* Early engagement is critical
-* Segment analysis guides strategy
-* Channel quality > volume
-* Predictive interventions outperform reactive
+**Lalima Singh**
+- Email: lalimasingh2004@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/lalima-singh-031431288)
+- [GitHub](https://github.com/lalimasingh2004-glitch)
+- [Live Dashboard](https://mobile-app-analytics-3.onrender.com)
