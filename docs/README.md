@@ -2,9 +2,11 @@
 
 > **[View Live Dashboard](https://mobile-app-analytics.onrender.com)** | [GitHub](https://github.com/lalimasingh2004-glitch/mobile_app_analytics)
 
-<img width="1841" height="767" alt="dash1" src="https://github.com/user-attachments/assets/1d315bc7-9340-41a9-97bc-fbf330ae7e75" />
+<img width="1395" height="833" alt="Screenshot 2026-05-17 174648" src="https://github.com/user-attachments/assets/e00fa2fe-a160-4d04-828c-050fbe87bcef" />
 
-<img width="1877" height="800" alt="dash2" src="https://github.com/user-attachments/assets/c4034d07-df37-49a5-bbdc-1086b67becfe" />
+<img width="1389" height="932" alt="Screenshot 2026-05-17 175158" src="https://github.com/user-attachments/assets/031ae9cd-ca9e-4289-9321-7aff5cb09c3d" />
+
+<img width="1377" height="922" alt="Screenshot 2026-05-17 175246" src="https://github.com/user-attachments/assets/a83cf709-d68f-490f-9cce-1c139c557891" />
 
 *A production-ready analytics and ML-powered churn prediction system for mobile applications.*
 Built with **Dash, Plotly, and Scikit-learn**, this project provides real-time business insights, predictive modeling, and user behavior analytics in one place.
